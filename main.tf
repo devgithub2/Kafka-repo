@@ -30,8 +30,4 @@ resource "confluent_kafka_cluster" "basic" {
   }
 }
 
-resource "confluent_service_account" "app-manager" {
-  display_name = "app-manager"
-  description  = "Service account to manage Kafka cluster"
-}
 
