@@ -40,8 +40,8 @@ resource "confluent_connector" "sink" {
   }
 
   config_sensitive = {
-    "aws.access.key.id"     = "AKIA42AMBBFXVZEELBF4"
-    "aws.secret.access.key" = "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"
+    "aws.access.key.id"     = var.aws_access_key_id
+    "aws.secret.access.key" = var.aws_secret_access_key
   }
 
   config_nonsensitive = {
