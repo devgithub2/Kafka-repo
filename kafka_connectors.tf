@@ -51,16 +51,13 @@ resource "confluent_connector" "sink" {
     "name"                     = "S3_SINKConnector_23"
     "kafka.auth.mode"          = "SERVICE_ACCOUNT"
     "kafka.service.account.id" = "sa-xwy06q"
-    "s3.bucket.name"           = "data-from-kafka-confi"  // Ensure this bucket exists in the us-east-2 region
+    "s3.bucket.name"           = "data-from-kafka-confi" // Ensure this bucket exists in the us-east-2 region
     "output.data.format"       = "JSON"
     "time.interval"            = "DAILY"
     "flush.size"               = "1000"
     "tasks.max"                = "1"
   }
 
-  lifecycle {
-    prevent_destroy = true
-  }
 }
 
 
@@ -170,7 +167,7 @@ resource "confluent_kafka_acl" "sink-connector-read-on-orders" {
   resource_type = "TOPIC"
   resource_name = "orders"
   pattern_type  = "LITERAL"
-  principal     = "User:sa-xwy06q"  // Ensure this matches the service account used by the sink connector
+  principal     = "User:sa-xwy06q" // Ensure this matches the service account used by the sink connector
   host          = "*"
   operation     = "READ"
   permission    = "ALLOW"
@@ -189,7 +186,7 @@ resource "confluent_kafka_acl" "dlq-create" {
   resource_type = "TOPIC"
   resource_name = "dlq-lcc" // This is a prefix for the topic
   pattern_type  = "PREFIXED"
-  principal     = "User:sa-xwy06q"  // Ensure this matches the service account used by the sink connector
+  principal     = "User:sa-xwy06q" // Ensure this matches the service account used by the sink connector
   host          = "*"
   operation     = "CREATE"
   permission    = "ALLOW"
@@ -208,7 +205,7 @@ resource "confluent_kafka_acl" "dlq-write" {
   resource_type = "TOPIC"
   resource_name = "dlq-lcc" // This is a prefix for the topic
   pattern_type  = "PREFIXED"
-  principal     = "User:sa-xwy06q"  // Ensure this matches the service account used by the sink connector
+  principal     = "User:sa-xwy06q" // Ensure this matches the service account used by the sink connector
   host          = "*"
   operation     = "WRITE"
   permission    = "ALLOW"
@@ -227,7 +224,7 @@ resource "confluent_kafka_acl" "consumer-group-read" {
   resource_type = "GROUP"
   resource_name = "connect-lcc-" // This is a prefix for the consumer group
   pattern_type  = "PREFIXED"
-  principal     = "User:sa-xwy06q"  // Ensure this matches the service account used by the sink connector
+  principal     = "User:sa-xwy06q" // Ensure this matches the service account used by the sink connector
   host          = "*"
   operation     = "READ"
   permission    = "ALLOW"
@@ -246,7 +243,7 @@ resource "confluent_kafka_acl" "consumer-group-describe" {
   resource_type = "GROUP"
   resource_name = "connect-lcc-" // This is a prefix for the consumer group
   pattern_type  = "PREFIXED"
-  principal     = "User:sa-xwy06q"  // Ensure this matches the service account used by the sink connector
+  principal     = "User:sa-xwy06q" // Ensure this matches the service account used by the sink connector
   host          = "*"
   operation     = "DESCRIBE"
   permission    = "ALLOW"
@@ -265,7 +262,7 @@ resource "confluent_kafka_acl" "consumer-group-delete" {
   resource_type = "GROUP"
   resource_name = "connect-lcc-" // This is a prefix for the consumer group
   pattern_type  = "PREFIXED"
-  principal     = "User:sa-xwy06q"  // Ensure this matches the service account used by the sink connector
+  principal     = "User:sa-xwy06q" // Ensure this matches the service account used by the sink connector
   host          = "*"
   operation     = "DELETE"
   permission    = "ALLOW"
