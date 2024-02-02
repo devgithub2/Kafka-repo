@@ -15,7 +15,7 @@ resource "confluent_kafka_topic" "orders" {
   }
 }
 
-resource "confluent_kafka_topic" "orders" {
+resource "confluent_kafka_topic" "ordersss" {
   kafka_cluster {
     id = confluent_kafka_cluster.basic.id
   }
